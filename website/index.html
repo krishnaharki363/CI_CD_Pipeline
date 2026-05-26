@@ -1,0 +1,92 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hotel Paradise</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <h1 class="logo">Hotel Paradise</h1>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#rooms">Rooms</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <h2>Luxury & Comfort</h2>
+      <p>Experience the best stay with premium rooms and services.</p>
+      <button onclick="bookNow()">Book Now</button>
+    </div>
+  </section>
+
+  <!-- Rooms -->
+  <section class="rooms" id="rooms">
+    <h2>Our Rooms</h2>
+
+    <div class="room-container">
+
+      <div class="room-card">
+        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85" alt="Room">
+        <h3>Deluxe Room</h3>
+        <p>$120 / Night</p>
+      </div>
+
+      <div class="room-card">
+        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="Room">
+        <h3>Executive Suite</h3>
+        <p>$220 / Night</p>
+      </div>
+
+      <div class="room-card">
+        <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a" alt="Room">
+        <h3>Family Room</h3>
+        <p>$180 / Night</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" id="services">
+    <h2>Our Services</h2>
+
+    <div class="service-boxes">
+      <div class="service">Free WiFi</div>
+      <div class="service">Swimming Pool</div>
+      <div class="service">Restaurant</div>
+      <div class="service">Airport Pickup</div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <h2>Contact Us</h2>
+
+    <form id="contactForm">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea placeholder="Message"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Hotel Paradise | All Rights Reserved</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
