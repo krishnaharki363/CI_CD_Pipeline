@@ -1,11 +1,5 @@
-FROM node:20-alpine
+FROM nginx:alpine
 
-WORKDIR /app
+COPY website/ /usr/share/nginx/html
 
-RUN npm install -g serve
-
-COPY website/ ./website
-
-EXPOSE 3000
-
-CMD ["serve", "-s", "website", "-l", "3000"]
+EXPOSE 80
