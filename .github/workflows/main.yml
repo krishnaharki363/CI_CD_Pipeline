@@ -1,0 +1,52 @@
+name: CI/CD Pipeline for Dockerized Hotel Website
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-scan-push-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout Repository
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. Login to Docker Hub
+      - name: Docker Hub Login
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      # 3. Build Docker Image
+      - name: Build Docker Image
+        run: |
+          docker build --no-cache -t naharki827/hotel-simple-website:latest .
+      # 4. Run Snyk Security Scan
+      - name: Run Snyk Scan
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: naharki827/hotel-simple-website:latest
+          args: --severity-threshold=high 
+
+      # 5. Push Docker Image
+      - name: Push Docker Image
+        run: |
+          docker push naharki827/hotel-simple-website:latest
+      # 6. Deploy to EC2
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            sudo docker pull naharki827/hotel-simple-website:latest
+            sudo docker stop hotel || true
+            sudo docker rm hotel || true
+            sudo docker run -d \
+              --name hotel \
+              -p 80:80 \
+              naharki827/hotel-simple-website:latest
